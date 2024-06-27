@@ -1,7 +1,5 @@
-import streamlit as st
+from recommender import Recommender
 
-
-st.write('Hello')
-s = st.text_input('Fav fffords')
-
-print(s)
+if __name__ == "__main__":
+    recommender = Recommender()
+    recommender.recommend()
