@@ -6,9 +6,9 @@ from typing import Tuple, Dict, List
 
 
 class Recommender:
-    def __init__(self):
-        self.ratings = pd.read_csv('data/ratings.csv')
-        self.movies = pd.read_csv('data/movies.csv')
+    def __init__(self, ratings_path, movies_path):
+        self.ratings = pd.read_csv(ratings_path)
+        self.movies = pd.read_csv(movies_path)
 
     @staticmethod
     def calculate_stats_and_bayesian_average(ratings_df: pd.DataFrame) -> pd.DataFrame:
@@ -118,7 +118,16 @@ class Recommender:
 
         return neighbour_ids
 
-    def recommend(self):
+    def recommend(self, movie_id: int) -> List[str]:
+        """
+        Recommends similar movies based on the provided movie ID.
+
+        Args:
+            movie_id: The ID of the movie for which to find similar movies.
+
+        Returns:
+            recommendations: List of recommended movie titles.
+        """
         movie_stats = self.calculate_stats_and_bayesian_average(self.ratings)
         movie_stats = movie_stats.merge(self.movies[['movieId', 'title']])
         movie_stats = movie_stats.sort_values('bayesian_avg', ascending=False)
@@ -131,11 +140,11 @@ class Recommender:
 
         movie_titles = dict(zip(self.movies['movieId'], self.movies['title']))
 
-        movie_id = 1  # Example movie ID
         similar_movies = self.find_similar_movies(movie_id, sparse_matrix, movie_to_index, index_to_movie,
                                                   metric='cosine', k=10)
-        movie_title = movie_titles[movie_id]
 
-        print(f"Because you watched {movie_title}:")
+        recommendations = []
         for similar_movie_id in similar_movies:
-            print(movie_titles[similar_movie_id])
+            recommendations.append(movie_titles[similar_movie_id])
+
+        return recommendations
