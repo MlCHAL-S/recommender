@@ -2,14 +2,50 @@
 
 This is a movie recommender system built using Python, the MovieLens dataset, and Streamlit.
 
-## Setup
+# Setup
 
-1. **Install the dependencies:**
+### Docker
+
+You can run the application using Docker. The Docker image can be pulled from Docker Hub.
+
+1. **Pull the Docker image:**
+    ```
+    docker pull mlchals/recommender-app:latest
+    ```
+
+2. **Run the Docker container:**
+    ```
+    docker run -dp 8501:8501 mlchals/recommender-app:latest
+    ```
+
+   > **Note:** The default port for Streamlit is `8501`. Ensure that this port is free on your system.
+
+## Github
+
+1. **Clone the repository:**
+    ```sh
+    git clone https://github.com/MlCHAL-S/recommender.git folder_name
+    cd folder_name
+    ```
+
+2. **Create a virtual environment:**
+    ```sh
+    python -m venv venv
+    ```
+
+3. **Activate the virtual environment:**
+   **(On Windows):**
+     ```sh
+     venv\Scripts\activate
+     ```
+
+
+4. **Install the dependencies:**
     ```sh
     pip install -r requirements.txt
     ```
 
-2. **Run the Streamlit app:**
+5. **Run the Streamlit app:**
     ```sh
     streamlit run app.py
     ```
@@ -51,11 +87,11 @@ Here is an example of how to interact with the recommender system:
 
 2. **Recommendations Page**: Select a movie from the dropdown menu 
 
-![Home Page](screenshots/Choosing.png)
+![Recommendations Page](screenshots/Choosing.png)
 
 and get recommendations for similar movies.
 
-![Home Page](screenshots/Recommendations.png)
+![Recommendations](screenshots/Recommendations.png)
 
 ## Acknowledgements
 

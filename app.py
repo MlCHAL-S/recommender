@@ -94,7 +94,8 @@ def recommendations_page():
 
     # Dropdown search bar
     movie_titles = recommender.movies['title'].tolist()
-    selected_movie_title = st.selectbox("Type in or search for a movie title", ["Search for a movie"] + movie_titles, index=0)
+    selected_movie_title = st.selectbox("Type in or search for a movie title", ["Search for a movie"] + movie_titles,
+                                        index=0)
 
     if selected_movie_title == "Search for a movie":
         st.write("Recommendations will appear here.")
